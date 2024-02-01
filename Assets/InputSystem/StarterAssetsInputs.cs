@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -20,6 +21,10 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+		public bool gamePaused = false;
+
+		public UnityEvent pauseEvent;
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnMove(InputValue value)
 		{
@@ -36,12 +41,31 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
+			//if (!gamePaused)
 			JumpInput(value.isPressed);
 		}
 
 		public void OnSprint(InputValue value)
 		{
-			SprintInput(value.isPressed);
+			//if (!gamePaused)
+				SprintInput(value.isPressed);
+		}
+
+		public void OnPause()
+		{
+			if (gamePaused == true)
+			{
+				cursorLocked = true;
+				gamePaused = false;
+			}
+			else
+			{
+				cursorLocked = false;
+				gamePaused = true;
+			}
+
+			pauseEvent.Invoke();
+			SetCursorState(cursorLocked);
 		}
 #endif
 
@@ -71,7 +95,7 @@ namespace StarterAssets
 			SetCursorState(cursorLocked);
 		}
 
-		private void SetCursorState(bool newState)
+		public void SetCursorState(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}

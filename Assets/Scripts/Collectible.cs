@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class Collectible : MonoBehaviour
 {
-    private bool isInRangeOfPlayer = false;
+    /*private bool isInRangeOfPlayer = false;
 
     public UnityEvent pickedUpEvent;
 
@@ -45,5 +45,5 @@ public class Collectible : MonoBehaviour
             pickedUpEvent.Invoke();
             Destroy(gameObject);
         }
-    }
+    }*/
 }
