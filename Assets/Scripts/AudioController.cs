@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 
 public class AudioController : MonoBehaviour
 {
-    public static AudioController Instance;
+    public static AudioController Instance { get; private set; }
 
     [Space()]
 
@@ -17,66 +17,45 @@ public class AudioController : MonoBehaviour
     [Space()]
 
     [SerializeField]
-    private AudioSource ammoPickupSound;
+    private AudioSource _clipAudioSource;
     [SerializeField]
-    private AudioSource backgroundMusic;
+    private AudioSource _backgroundAudioSource;
 
-    /*private float masterVolume = 1f;
-    private float bgVolume = 1f;
-    private float sfxVolume = 1f;
-
-    public float MasterVolume
-    {
-        get { return masterVolume; }
-        set
-        {
-            masterVolume = value;
-        }
-            
-            
-    }
-    public float BGVolume
-    {
-        get { return bgVolume; }
-        set
-        {
-            bgVolume = value;
-        }
-
-
-    }
-    public float SFXVolume
-    {
-        get { return sfxVolume; }
-        set
-        {
-            sfxVolume = value;
-        }
-
-
-    }*/
+    [SerializeField]
+    private List<AudioClip> _sfxClips;
+    [SerializeField]
+    private List<AudioClip> _bgClips;
 
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
-        else if (Instance != this)
+            
+            DontDestroyOnLoad(gameObject);
+        }
+        else
             Destroy(gameObject);
-    }
 
-    /*public void UpdateBGSounds()
-    {
-        backgroundMusic.volume = bgVolume * masterVolume;
+        LoadAudioSettings();
     }
-
-    public void UpdateSFXSounds()
-    {
-        ammoPickupSound.volume = sfxVolume * masterVolume;
-        
-    }*/
 
     public void PlayAmmoPickupSound()
     {
-        ammoPickupSound.Play();
+        _clipAudioSource.PlayOneShot(_sfxClips[0]);
     }   
+
+    public void SetBackgroundMusic(int index)
+    {
+        _backgroundAudioSource.Stop();
+        _backgroundAudioSource.clip = _bgClips[index];
+        _backgroundAudioSource.Play();
+    }
+
+    public void LoadAudioSettings()
+    {
+        AudioMixer.SetFloat(Settings.MASTER_VOLUME, Mathf.Log10(PlayerPrefs.GetFloat(Settings.MASTER_VOLUME, 1f)) * 20);
+        AudioMixer.SetFloat(Settings.BACKGROUND_VOLUME, Mathf.Log10(PlayerPrefs.GetFloat(Settings.BACKGROUND_VOLUME, 1f)) * 20);
+        AudioMixer.SetFloat(Settings.SFX_VOLUME, Mathf.Log10(PlayerPrefs.GetFloat(Settings.SFX_VOLUME, 1f)) * 20);
+    }
 }
