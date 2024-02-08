@@ -4,16 +4,20 @@ using TMPro;
 using UnityEngine;
 
 public class UIScript : MonoBehaviour
-{
-    private int ammoCount = 0;
+{   
     [SerializeField]
     private string _label = "Chinese Takeout Retrieved";
     [SerializeField]
-    private TextMeshProUGUI ammoCounterText;
+    private TextMeshProUGUI _chineseTakeoutCounterText;
 
-    public void AddAmmo()
+    private void Start()
     {
-        ammoCount++;
-        ammoCounterText.text = $"{_label}: {ammoCount}";
+        _chineseTakeoutCounterText.text = $"{_label}: {Stats.Instance.ChineseTakeout}";
+    }
+
+    public void AddChineseTakeout()
+    {
+        Stats.Instance.ChineseTakeout++;
+        _chineseTakeoutCounterText.text = $"{_label}: {Stats.Instance.ChineseTakeout}";
     }
 }
