@@ -37,7 +37,14 @@ public class AudioController : MonoBehaviour
         else
             Destroy(gameObject);
 
-        LoadAudioSettings();
+        //LoadAudioSettings();
+    }
+
+    private void Start()
+    {
+        AudioMixer.SetFloat(Settings.MASTER_VOLUME, Mathf.Log10(PlayerPrefs.GetFloat(Settings.MASTER_VOLUME, 1f)) * 20);
+        AudioMixer.SetFloat(Settings.BACKGROUND_VOLUME, Mathf.Log10(PlayerPrefs.GetFloat(Settings.BACKGROUND_VOLUME, 1f)) * 20);
+        AudioMixer.SetFloat(Settings.SFX_VOLUME, Mathf.Log10(PlayerPrefs.GetFloat(Settings.SFX_VOLUME, 1f)) * 20);
     }
 
     public void PlayAmmoPickupSound()
