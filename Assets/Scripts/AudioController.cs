@@ -42,9 +42,13 @@ public class AudioController : MonoBehaviour
 
     private void Start()
     {
-        AudioMixer.SetFloat(Settings.MASTER_VOLUME, Mathf.Log10(PlayerPrefs.GetFloat(Settings.MASTER_VOLUME, 1f)) * 20);
-        AudioMixer.SetFloat(Settings.BACKGROUND_VOLUME, Mathf.Log10(PlayerPrefs.GetFloat(Settings.BACKGROUND_VOLUME, 1f)) * 20);
-        AudioMixer.SetFloat(Settings.SFX_VOLUME, Mathf.Log10(PlayerPrefs.GetFloat(Settings.SFX_VOLUME, 1f)) * 20);
+        float masterVolume = PlayerPrefs.GetFloat(Settings.MASTER_VOLUME, 1f);
+        float backgroundVolume = PlayerPrefs.GetFloat(Settings.BACKGROUND_VOLUME, 1f);
+        float sfxVolume = PlayerPrefs.GetFloat(Settings.SFX_VOLUME, 1f);
+
+        AudioMixer.SetFloat(Settings.MASTER_VOLUME, Mathf.Approximately(masterVolume, 0f) ? -80f : Mathf.Log10(masterVolume) * 20);
+        AudioMixer.SetFloat(Settings.BACKGROUND_VOLUME, Mathf.Approximately(backgroundVolume, 0f) ? -80f : Mathf.Log10(backgroundVolume) * 20);
+        AudioMixer.SetFloat(Settings.SFX_VOLUME, Mathf.Approximately(sfxVolume, 0f) ? -80f : Mathf.Log10(sfxVolume) * 20);
     }
 
     public void PlayAmmoPickupSound()

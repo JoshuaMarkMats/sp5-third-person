@@ -57,19 +57,21 @@ public class Settings : MonoBehaviour
 
     private void MasterVolumeChanged()
     {
-        AudioController.Instance.AudioMixer.SetFloat("MasterVolume", Mathf.Log10(masterSlider.value) * 20);
+        AudioController.Instance.AudioMixer.SetFloat("MasterVolume", Mathf.Approximately(masterSlider.value, 0f) ? -80f : Mathf.Log10(masterSlider.value) * 20);
         masterVolumeText.text = $"{(int)(masterSlider.value * 100)}";
+
+        
     }
 
     private void BGVolumeChanged()
     {
-        AudioController.Instance.AudioMixer.SetFloat("BackgroundVolume", Mathf.Log10(bgSlider.value) * 20);
+        AudioController.Instance.AudioMixer.SetFloat("BackgroundVolume", Mathf.Approximately(bgSlider.value, 0f) ? -80f : Mathf.Log10(bgSlider.value) * 20);
         bgVolumeText.text = $"{(int)(bgSlider.value * 100)}";
     }
 
     private void SFXVolumeChanged()
     {
-        AudioController.Instance.AudioMixer.SetFloat("SFXVolume", Mathf.Log10(sfxSlider.value) * 20);
+        AudioController.Instance.AudioMixer.SetFloat("SFXVolume", Mathf.Approximately(sfxSlider.value, 0f) ? -80f : Mathf.Log10(sfxSlider.value) * 20);
         sfxVolumeText.text = $"{(int)(sfxSlider.value * 100)}";
     }
 }
