@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Events;
-using UnityEngine.Rendering;
 
 public class AudioController : MonoBehaviour
 {
@@ -63,6 +61,7 @@ public class AudioController : MonoBehaviour
         _backgroundAudioSource.Play();
     }
 
+    //this is bugges somehow
     public void LoadAudioSettings()
     {
         AudioMixer.SetFloat(Settings.MASTER_VOLUME, Mathf.Log10(PlayerPrefs.GetFloat(Settings.MASTER_VOLUME, 1f)) * 20);

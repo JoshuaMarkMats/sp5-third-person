@@ -19,7 +19,7 @@ public class PlayerInteract : MonoBehaviour
     {
         //gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
-        pickedUpEvent.AddListener(GameObject.FindGameObjectWithTag("UIController").GetComponent<UIScript>().AddChineseTakeout);
+        pickedUpEvent.AddListener(Stats.Instance.AddChineseTakeout);
         pickedUpEvent.AddListener(AudioController.Instance.PlayAmmoPickupSound);
     }
 

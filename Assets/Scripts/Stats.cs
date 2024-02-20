@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
+using UnityEngine.Events;
 
 public class Stats : MonoBehaviour
 {
     public static Stats Instance { get; private set; }
 
     public int ChineseTakeout = 0;
+
+    public UnityEvent StatsUpdatedEvent;
 
     private void Awake()
     {
@@ -19,5 +21,11 @@ public class Stats : MonoBehaviour
         }
         else
             Destroy(gameObject);
+    }
+
+    public void AddChineseTakeout()
+    {
+        ChineseTakeout++;
+        StatsUpdatedEvent.Invoke();
     }
 }

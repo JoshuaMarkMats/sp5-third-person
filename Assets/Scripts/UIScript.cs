@@ -12,12 +12,13 @@ public class UIScript : MonoBehaviour
 
     private void Start()
     {
-        _chineseTakeoutCounterText.text = $"{_label}: {Stats.Instance.ChineseTakeout}";
+        UpdateUI();
+
+        Stats.Instance.StatsUpdatedEvent.AddListener(UpdateUI);
     }
 
-    public void AddChineseTakeout()
+    public void UpdateUI()
     {
-        Stats.Instance.ChineseTakeout++;
         _chineseTakeoutCounterText.text = $"{_label}: {Stats.Instance.ChineseTakeout}";
     }
 }

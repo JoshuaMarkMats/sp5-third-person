@@ -19,10 +19,6 @@ public class Settings : MonoBehaviour
     private Slider sfxSlider;
     [SerializeField]
     private TextMeshProUGUI sfxVolumeText;
-    [SerializeField]
-    private Slider miscSlider;
-    [SerializeField]
-    private TextMeshProUGUI miscVolumeText;
 
     public const string MASTER_VOLUME = "MasterVolume";
     public const string BACKGROUND_VOLUME = "BackgroundVolume";
