@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 public class UIScript : MonoBehaviour
-{   
+{    
     [SerializeField]
     private string _label = "Chinese Takeout Retrieved";
     [SerializeField]

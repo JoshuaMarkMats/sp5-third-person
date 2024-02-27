@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Settings : MonoBehaviour
+public class AudioSettings : MonoBehaviour
 {
     [SerializeField]
     private Slider masterSlider;
