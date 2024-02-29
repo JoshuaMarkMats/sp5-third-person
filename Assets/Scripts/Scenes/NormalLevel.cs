@@ -11,6 +11,7 @@ public class NormalLevel : MonoBehaviour
     private void Start()
     {
         AudioController.Instance.SetBackgroundMusic(0);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()

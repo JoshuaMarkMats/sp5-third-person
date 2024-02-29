@@ -192,7 +192,7 @@ namespace StarterAssets
 
         private void CameraRotation()
         {
-            if (_input.gamePaused)
+            if (GameController.Instance.GamePaused)
                 return;
 
             // if there is an input and camera position is not fixed

@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerInteract : MonoBehaviour
 {
-    //private GameController gameController;
     public UnityEvent pickedUpEvent;
 
     [SerializeField]
@@ -17,8 +16,6 @@ public class PlayerInteract : MonoBehaviour
 
     private void Start()
     {
-        //gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-
         pickedUpEvent.AddListener(Stats.Instance.AddChineseTakeout);
         pickedUpEvent.AddListener(AudioController.Instance.PlayAmmoPickupSound);
     }
@@ -42,6 +39,5 @@ public class PlayerInteract : MonoBehaviour
                 break;
             }
         }
-        //gameController.itemPickedUpEvent.Invoke();
     }
 }

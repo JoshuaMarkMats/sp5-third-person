@@ -18,12 +18,10 @@ namespace StarterAssets
 		public bool analogMovement;
 
 		[Header("Mouse Cursor Settings")]
-		public bool cursorLocked = true;
+		public bool cursorLocked = false;
 		public bool cursorInputForLook = true;
 
 		public bool gamePaused = false;
-
-		public UnityEvent pauseEvent;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnMove(InputValue value)
@@ -41,36 +39,41 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
-			//if (!gamePaused)
 			JumpInput(value.isPressed);
 		}
 
 		public void OnSprint(InputValue value)
 		{
-			//if (!gamePaused)
-				SprintInput(value.isPressed);
+			SprintInput(value.isPressed);
 		}
 
 		public void OnPause()
 		{
-			if (gamePaused == true)
+            GameController.Instance.TogglePause();
+            Cursor.lockState = GameController.Instance.GamePaused ? CursorLockMode.None : CursorLockMode.Locked;
+
+            /*if (gamePaused == true)
 			{
-				cursorLocked = true;
-				gamePaused = false;
+				Cursor.lockState = CursorLockMode.None;
+				GameController.Instance.TogglePause();
 			}
 			else
 			{
-				cursorLocked = false;
-				gamePaused = true;
-			}
-
-			pauseEvent.Invoke();
-			SetCursorState(cursorLocked);
-		}
+                Cursor.lockState = CursorLockMode.Locked;
+                GameController.Instance.TogglePause();
+            }*/
+        }
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
+        private void OnApplicationFocus(bool hasFocus)
+        {
+
+            Cursor.lockState = GameController.Instance.GamePaused ? CursorLockMode.None : CursorLockMode.Locked;
+
+        }
+
+        public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
 		} 
@@ -88,16 +91,6 @@ namespace StarterAssets
 		public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
-		}
-
-		private void OnApplicationFocus(bool hasFocus)
-		{
-			SetCursorState(cursorLocked);
-		}
-
-		public void SetCursorState(bool newState)
-		{
-			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
 	}
 	

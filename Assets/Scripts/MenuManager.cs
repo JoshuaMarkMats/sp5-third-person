@@ -11,30 +11,41 @@ public enum Menu
 public static class MenuManager
 {
     public static bool IsInitialized = false;
-    public static GameObject mainMenu, settingsMenu;
+    private static GameObject _menuMain, _menuSettings;
+    private static GameObject _activeMenu;
 
     public static void Init()
     {
         GameObject canvas = GameObject.Find("Canvas");
-        mainMenu = canvas.transform.Find("MainMenu").gameObject;
-        settingsMenu = canvas.transform.Find("SettingsMenu").gameObject;
+        _menuMain = canvas.transform.Find("MenuMain").gameObject;
+        _menuSettings = canvas.transform.Find("MenuSettings").gameObject;
 
         IsInitialized = true;
     }
 
-    public static void OpenMenu(Menu menu, GameObject callingMenu)
+    public static void OpenMenu(Menu menu)
     {
         if (!IsInitialized) Init();
+
+        if (_activeMenu != null)
+            _activeMenu.SetActive(false);
 
         switch (menu)
         {
             case Menu.MAIN:
-                mainMenu.SetActive(true);
+                _menuMain.SetActive(true);
+                _activeMenu = _menuMain;
                 break;
             case Menu.SETTINGS:
-                settingsMenu.SetActive(true);
+                _menuSettings.SetActive(true);
+                _activeMenu = _menuSettings;
                 break;
         }
+    }
+
+    public static void OpenMenu(Menu menu, GameObject callingMenu)
+    {
+        OpenMenu(menu);
 
         callingMenu.SetActive(false);
     }

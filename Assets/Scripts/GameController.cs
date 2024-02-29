@@ -2,24 +2,35 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController Instance;
+
     [SerializeField]
     private StarterAssetsInputs inputs;
-
     [SerializeField]
-    private GameObject settingsMenu;
+    private UIController _uiController;
 
-    private void Start()
+    [HideInInspector]
+    public UnityEvent PauseEvent;
+
+    public bool GamePaused { get; private set; } = false;
+
+    private void Awake()
     {
-        inputs.pauseEvent.AddListener(TogglePause);
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
+            Destroy(gameObject);
     }
 
-    private void TogglePause()
+    public void TogglePause()
     {
-        settingsMenu.SetActive(inputs.gamePaused);
-        Time.timeScale = inputs.gamePaused? 0f : 1f;
-    } 
+        GamePaused = !GamePaused;
+        Time.timeScale = GamePaused? 0f : 1f;
+        PauseEvent?.Invoke();
+    }
 }

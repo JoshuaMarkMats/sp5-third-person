@@ -11,6 +11,7 @@ public class RedLevel : MonoBehaviour
     private void Start()
     {
         AudioController.Instance.SetBackgroundMusic(1);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()

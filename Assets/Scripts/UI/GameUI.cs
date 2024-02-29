@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class UIScript : MonoBehaviour
-{    
+public class GameUI : MonoBehaviour
+{
     [SerializeField]
     private string _label = "Chinese Takeout Retrieved";
     [SerializeField]
