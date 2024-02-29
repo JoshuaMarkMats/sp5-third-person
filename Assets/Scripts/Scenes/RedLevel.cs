@@ -22,6 +22,9 @@ public class RedLevel : MonoBehaviour
         }
 
         if (_itemsToPickup.Count <= 0)
-            SceneManager.LoadScene("Playground");
+        {
+            SceneLoader.LoadScene("Playground");
+        }
+            
     }
 }

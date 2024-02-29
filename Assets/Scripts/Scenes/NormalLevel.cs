@@ -22,6 +22,9 @@ public class NormalLevel : MonoBehaviour
         }
 
         if (_itemsToPickup.Count <= 0)
-            SceneManager.LoadScene("RedLevel");
+        {
+            SceneLoader.LoadScene("RedLevel");
+        }
+            
     }
 }
