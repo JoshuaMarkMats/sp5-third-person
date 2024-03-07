@@ -50,7 +50,7 @@ namespace StarterAssets
 		public void OnPause()
 		{
             GameController.Instance.TogglePause();
-            Cursor.lockState = GameController.Instance.GamePaused ? CursorLockMode.None : CursorLockMode.Locked;
+            
 
             /*if (gamePaused == true)
 			{

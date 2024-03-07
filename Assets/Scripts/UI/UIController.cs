@@ -24,6 +24,9 @@ public class UIController : MonoBehaviour
         GameController.Instance.PauseEvent.AddListener(TogglePause);
 
         Stats.Instance.StatsUpdatedEvent.AddListener(UpdateUI);
+
+        MenuManager.Init();
+        _pauseScreen.SetActive(false);
     }
 
     private void UpdateUI()
@@ -35,14 +38,9 @@ public class UIController : MonoBehaviour
     {
         bool gamePaused = GameController.Instance.GamePaused;
 
+        Cursor.lockState = gamePaused ? CursorLockMode.None : CursorLockMode.Locked;
+
         _gameUI.SetActive(!gamePaused);
         _pauseScreen.SetActive(gamePaused);
-
-        if (gamePaused) MenuManager.OpenMenu(Menu.NONE);
-    }
-
-    public void OpenSettings()
-    {
-        MenuManager.OpenMenu(Menu.SETTINGS);
     }
 }

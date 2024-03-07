@@ -16,9 +16,9 @@ public static class MenuManager
 
     public static void Init()
     {
-        GameObject canvas = GameObject.Find("Canvas");
-        _menuMain = canvas.transform.Find("MenuMain").gameObject;
-        _menuSettings = canvas.transform.Find("MenuSettings").gameObject;
+        GameObject menuHolder = GameObject.FindGameObjectWithTag("MenuHolder");
+        _menuMain = menuHolder.transform.Find("MenuMain").gameObject;
+        _menuSettings = menuHolder.transform.Find("MenuSettings").gameObject;
 
         IsInitialized = true;
     }

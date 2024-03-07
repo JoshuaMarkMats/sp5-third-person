@@ -33,4 +33,9 @@ public class GameController : MonoBehaviour
         Time.timeScale = GamePaused? 0f : 1f;
         PauseEvent?.Invoke();
     }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
 }
