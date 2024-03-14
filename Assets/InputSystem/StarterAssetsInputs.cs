@@ -23,6 +23,8 @@ namespace StarterAssets
 
 		public bool gamePaused = false;
 
+		public UnityEvent ToggleFlashlightEvent;
+
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 		public void OnMove(InputValue value)
 		{
@@ -50,19 +52,12 @@ namespace StarterAssets
 		public void OnPause()
 		{
             GameController.Instance.TogglePause();
-            
-
-            /*if (gamePaused == true)
-			{
-				Cursor.lockState = CursorLockMode.None;
-				GameController.Instance.TogglePause();
-			}
-			else
-			{
-                Cursor.lockState = CursorLockMode.Locked;
-                GameController.Instance.TogglePause();
-            }*/
         }
+
+		public void OnToggleFlashlight()
+		{
+			ToggleFlashlightEvent.Invoke();
+		}
 #endif
 
 
