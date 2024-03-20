@@ -1,7 +1,9 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
 
 public class PlayerInteract : MonoBehaviour
 {
@@ -13,6 +15,14 @@ public class PlayerInteract : MonoBehaviour
     private Vector3 interactOffset = Vector3.up;
 
     private Collider[] insideInteractRange;
+
+    private Animator _playerAnimator;
+    
+
+    private void Awake()
+    {
+        _playerAnimator = GetComponent<Animator>();
+    }
 
     private void Start()
     {
@@ -36,6 +46,7 @@ public class PlayerInteract : MonoBehaviour
             {
                 Destroy(col.gameObject);
                 pickedUpEvent.Invoke();
+                _playerAnimator.SetTrigger("PickUp");
                 break;
             }
         }

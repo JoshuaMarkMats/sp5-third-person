@@ -28,6 +28,9 @@ namespace StarterAssets
         [Tooltip("Acceleration and deceleration")]
         public float SpeedChangeRate = 10.0f;
 
+        [Tooltip("Whether the character can move")]
+        public bool CanMove = true;
+
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
         [Range(0, 1)] public float FootstepAudioVolume = 0.5f;
@@ -216,6 +219,10 @@ namespace StarterAssets
 
         private void Move()
         {
+            //disable following code if character is marked cannot move
+            if (!CanMove)
+                return;
+
             // set target speed based on move speed, sprint speed and if sprint is pressed
             float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
 
@@ -280,6 +287,16 @@ namespace StarterAssets
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
             }
+        }
+
+        public void EnableMovement()
+        {
+            CanMove = true;
+        }
+
+        public void DisableMovement()
+        {
+            CanMove = false;
         }
 
         private void JumpAndGravity()
