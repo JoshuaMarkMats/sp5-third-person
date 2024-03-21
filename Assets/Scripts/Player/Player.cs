@@ -5,7 +5,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(ThirdPersonController))]
 [RequireComponent(typeof(StarterAssetsInputs))]
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 {
     private Animator _playerAnimator;
     private StarterAssetsInputs _input;
@@ -15,6 +15,10 @@ public class Player : MonoBehaviour
     private bool _flashlightOn = false;
 
     private ThirdPersonController _playerController;
+
+    private bool _isAlive = true;
+
+    public bool IsAlive { get { return _isAlive; } }
 
     private const string TURN_ON_FLASHLIGHT_PARAMETER = "TurnOnFlashlight";
     private const string TURN_OFF_FLASHLIGHT_PARAMETER = "TurnOffFlashlight";
@@ -31,6 +35,11 @@ public class Player : MonoBehaviour
         _input.ToggleFlashlightEvent.AddListener(ToggleFlashlight);
     }
 
+    public void TakeDamage(int damage)
+    {
+        Debug.Log("Hurt");
+    }
+
     private void ToggleFlashlight()
     {
         if (!_playerController.CanMove)
@@ -39,5 +48,10 @@ public class Player : MonoBehaviour
         _flashlightOn = !_flashlightOn;
         _playerAnimator.SetTrigger(_flashlightOn ? TURN_ON_FLASHLIGHT_PARAMETER : TURN_OFF_FLASHLIGHT_PARAMETER);
         _flashlight.SetActive(_flashlightOn);
+    }
+
+    public Transform GetTransform()
+    {
+        return transform;
     }
 }
