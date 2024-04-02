@@ -16,6 +16,8 @@ public class PlayerInteract : MonoBehaviour
 
     private Collider[] insideInteractRange;
 
+    private DialogueNPC _currentDialogueNPC;
+
     private Animator _playerAnimator;
     
 
@@ -28,6 +30,16 @@ public class PlayerInteract : MonoBehaviour
     {
         pickedUpEvent.AddListener(Stats.Instance.AddChineseTakeout);
         pickedUpEvent.AddListener(AudioController.Instance.PlayAmmoPickupSound);
+    }
+
+    private void Update()
+    {
+        //stop talking to current npc if it goes out of range
+        if (_currentDialogueNPC != null && Vector3.SqrMagnitude(_currentDialogueNPC.transform.position - transform.position) > interactRange * interactRange)
+        {
+            _currentDialogueNPC.StopSpeaking();
+            _currentDialogueNPC = null;
+        }
     }
 
     private void OnDrawGizmosSelected()
@@ -47,6 +59,19 @@ public class PlayerInteract : MonoBehaviour
                 Destroy(col.gameObject);
                 pickedUpEvent.Invoke();
                 _playerAnimator.SetTrigger("PickUp");
+                break;
+            }
+            else if (col.TryGetComponent(out DialogueNPC dialogueNPC))
+            {
+                if (_currentDialogueNPC != null)
+                {
+                    if (dialogueNPC.Speak()) _currentDialogueNPC = null;
+                }
+                else
+                {
+                    _currentDialogueNPC = dialogueNPC;
+                    if (dialogueNPC.Speak()) _currentDialogueNPC = null;
+                }
                 break;
             }
         }

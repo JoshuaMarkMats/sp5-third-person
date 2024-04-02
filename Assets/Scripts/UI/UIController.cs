@@ -5,17 +5,28 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
+    public static UIController Instance;
+
     [SerializeField]
     private GameObject _gameUI;
     [SerializeField]
     private string _label = "Chinese Takeout Retrieved";
     [SerializeField]
     private TextMeshProUGUI _chineseTakeoutCounterText;
+    public SpeechBox speechBox;
 
     [Space()]
 
     [SerializeField]
     private GameObject _pauseScreen;
+
+    private void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else if (Instance != this)
+            Destroy(gameObject);
+    }
 
     private void Start()
     {
