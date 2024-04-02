@@ -33,7 +33,7 @@ namespace StarterAssets
 
 		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
+			if (cursorInputForLook)
 			{
 				LookInput(value.Get<Vector2>());
 			}
@@ -51,8 +51,8 @@ namespace StarterAssets
 
 		public void OnPause()
 		{
-            GameController.Instance.TogglePause();
-        }
+			if (!GameController.Instance.IsGameOver) GameController.Instance.TogglePause();
+		}
 
 		public void OnToggleFlashlight()
 		{
@@ -61,10 +61,10 @@ namespace StarterAssets
 #endif
 
 
-        private void OnApplicationFocus(bool hasFocus)
-        {
+		private void OnApplicationFocus(bool hasFocus)
+		{
 
-            Cursor.lockState = GameController.Instance.GamePaused ? CursorLockMode.None : CursorLockMode.Locked;
+			Cursor.lockState = (GameController.Instance.GamePaused || GameController.Instance.IsGameOver) ? CursorLockMode.None : CursorLockMode.Locked;
 
         }
 

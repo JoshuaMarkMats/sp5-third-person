@@ -9,6 +9,8 @@ TagManager:
   - UIController
   - Collectible
   - MenuHolder
+  - DialogueNPC
+  - Exit
   layers:
   - Default
   - TransparentFX

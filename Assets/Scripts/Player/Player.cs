@@ -37,7 +37,7 @@ public class Player : MonoBehaviour, IDamageable
 
     public void TakeDamage(int damage)
     {
-        Debug.Log("Hurt");
+        GameController.Instance.GameOver();
     }
 
     private void ToggleFlashlight()

@@ -16,8 +16,11 @@ public class GameController : MonoBehaviour
 
     [HideInInspector]
     public UnityEvent PauseEvent;
+    [HideInInspector]
+    public UnityEvent GameOverEvent;
 
     public bool GamePaused { get; private set; } = false;
+    public bool IsGameOver { get; private set; } = false;
 
     private void Awake()
     {
@@ -34,8 +37,22 @@ public class GameController : MonoBehaviour
         PauseEvent?.Invoke();
     }
 
+    public void GameOver()
+    {
+        IsGameOver = true;
+        Time.timeScale = 0f;
+        GameOverEvent?.Invoke();
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1f;
+        Stats.Instance.ChineseTakeout = 0;
+        SceneLoader.LoadScene("CrashedShip");
+    }
+
     public void ReturnToMainMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneLoader.LoadScene("MainMenu");
     }
 }

@@ -7,4 +7,10 @@ public static class SceneLoader
         MenuManager.IsInitialized = false;
         SceneManager.LoadScene(sceneName);
     }
+
+    public static void LoadScene(int sceneIndex)
+    {
+        MenuManager.IsInitialized = false;
+        SceneManager.LoadScene(sceneIndex);
+    }
 }

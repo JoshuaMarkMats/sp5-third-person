@@ -61,6 +61,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        State = EnemyState.Patrol;
     }
 
     private void OnDrawGizmosSelected()
@@ -110,12 +111,6 @@ public class EnemyController : MonoBehaviour
                 followCoroutine = StartCoroutine(followTarget());
                 break;
         }
-    }
-
-    public void StartChasing()
-    {
-        //followCoroutine = StartCoroutine(followTarget());
-        State = EnemyState.Patrol;
     }
 
     public void Spawn()

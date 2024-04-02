@@ -21,7 +21,7 @@ MonoBehaviour:
     m_Bits: 256
   detectionRange: 5
   fieldOfView: 90
-  DefaultState: 1
+  DefaultState: 2
   idleLocationRadius: 4
   idleMovespeedMultiplier: 1
   AIUpdateInterval: 0.1

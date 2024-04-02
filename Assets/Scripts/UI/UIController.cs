@@ -14,11 +14,15 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI _chineseTakeoutCounterText;
     public SpeechBox speechBox;
+    public GameObject interactBoxObject;
+    public TextMeshProUGUI interactText;
 
     [Space()]
 
     [SerializeField]
     private GameObject _pauseScreen;
+    [SerializeField]
+    private GameObject _gameOverScreen;
 
     private void Awake()
     {
@@ -33,16 +37,37 @@ public class UIController : MonoBehaviour
         UpdateUI();
 
         GameController.Instance.PauseEvent.AddListener(TogglePause);
+        GameController.Instance.GameOverEvent.AddListener(OnGameOver);
 
         Stats.Instance.StatsUpdatedEvent.AddListener(UpdateUI);
 
         MenuManager.Init();
         _pauseScreen.SetActive(false);
+        _gameOverScreen.SetActive(false);
+        interactBoxObject.SetActive(false);
     }
 
     private void UpdateUI()
     {
         _chineseTakeoutCounterText.text = $"{_label}: {Stats.Instance.ChineseTakeout}";
+    }
+
+    public void ShowInteract(string message)
+    {
+        if (message == "")
+            interactBoxObject.SetActive(false);
+        else
+        {
+            interactBoxObject.SetActive(true);
+            interactText.text = message;
+        }
+    }
+
+    private void OnGameOver()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        _gameUI.SetActive(false);
+        _gameOverScreen.SetActive(true);
     }
 
     private void TogglePause()

@@ -61,7 +61,7 @@ public class AttackRadius : MonoBehaviour
             {
                 onAttack?.Invoke(closestDamageable);
                 targetClosestDamageable = closestDamageable;
-                //closestDamageable.TakeDamage(damage);
+                closestDamageable.TakeDamage(damage);
             }
 
             yield return wait;
@@ -73,11 +73,16 @@ public class AttackRadius : MonoBehaviour
         attackCoroutine = null;      
     }
 
-    public void Attack()
+    //was supposed to be for delayed attack but oh well lacking time
+    /*public void Attack()
     {
         if (Vector3.Distance(transform.position, targetClosestDamageable.GetTransform().position) < sphereCollider.radius)
+        {
+            Debug.Log($"{gameObject.name} is attacking {targetClosestDamageable}");
             targetClosestDamageable.TakeDamage(damage);
-    }
+        }
+            
+    }*/
 
     private IDamageable GetClosestDamageable()
     {
