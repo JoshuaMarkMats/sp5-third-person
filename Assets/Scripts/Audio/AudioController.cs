@@ -47,12 +47,12 @@ public class AudioController : MonoBehaviour
         AudioMixer.SetFloat(AudioSettings.MASTER_VOLUME, Mathf.Approximately(masterVolume, 0f) ? -80f : Mathf.Log10(masterVolume) * 20);
         AudioMixer.SetFloat(AudioSettings.BACKGROUND_VOLUME, Mathf.Approximately(backgroundVolume, 0f) ? -80f : Mathf.Log10(backgroundVolume) * 20);
         AudioMixer.SetFloat(AudioSettings.SFX_VOLUME, Mathf.Approximately(sfxVolume, 0f) ? -80f : Mathf.Log10(sfxVolume) * 20);
-    }
+    } 
 
-    public void PlayAmmoPickupSound()
+    public void PlaySFX(int index)
     {
-        _clipAudioSource.PlayOneShot(_sfxClips[0]);
-    }   
+        _clipAudioSource.PlayOneShot(_sfxClips[index]);
+    }
 
     public void SetBackgroundMusic(int index)
     {

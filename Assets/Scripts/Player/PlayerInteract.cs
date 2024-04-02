@@ -31,7 +31,7 @@ public class PlayerInteract : MonoBehaviour
     private void Start()
     {
         pickedUpEvent.AddListener(Stats.Instance.AddChineseTakeout);
-        pickedUpEvent.AddListener(AudioController.Instance.PlayAmmoPickupSound);
+        pickedUpEvent.AddListener(() => AudioController.Instance.PlaySFX(0));
     }
 
     private void Update()

@@ -148,6 +148,9 @@ MonoBehaviour:
   _backgroundAudioSource: {fileID: 3816908683904864388}
   _sfxClips:
   - {fileID: 8300000, guid: 1ae936238f00de4499ae6e47d7c234eb, type: 3}
+  - {fileID: 8300000, guid: 33f33a1cbb2d36f4f901ceedd79b791d, type: 3}
+  - {fileID: 8300000, guid: 458a6ac5f75c03e4c9f4ad0765567a12, type: 3}
+  - {fileID: 8300000, guid: 8b54fc8c8015ac2418affa1942a49b6b, type: 3}
   _bgClips:
   - {fileID: 8300000, guid: 1128ffd6bfd251545a4284fc286329e9, type: 3}
   - {fileID: 8300000, guid: 5517da54ccd49374383f1be8568d9b31, type: 3}
