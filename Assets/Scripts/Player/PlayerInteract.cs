@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-
+[RequireComponent(typeof(StarterAssetsInputs))]
 public class PlayerInteract : MonoBehaviour
 {
     public UnityEvent pickedUpEvent;
@@ -21,11 +21,12 @@ public class PlayerInteract : MonoBehaviour
     private bool isTalking = false;
 
     private Animator _playerAnimator;
-    
+    private StarterAssetsInputs _playerInputs;
 
     private void Awake()
     {
         _playerAnimator = GetComponent<Animator>();
+        _playerInputs = GetComponent<StarterAssetsInputs>();
     }
 
     private void Start()
@@ -134,6 +135,7 @@ public class PlayerInteract : MonoBehaviour
                 Destroy(_currentInteractable.gameObject);
                 pickedUpEvent.Invoke();
                 _playerAnimator.SetTrigger("PickUp");
+                _playerInputs.crouch = 0f;
                 break;
             case "DialogueNPC":
                 if (_currentInteractable.TryGetComponent(out DialogueNPC dialogueNPC))

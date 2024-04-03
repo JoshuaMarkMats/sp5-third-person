@@ -13,6 +13,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public float crouch = 0f;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -47,6 +48,11 @@ namespace StarterAssets
 		public void OnSprint(InputValue value)
 		{
 			SprintInput(value.isPressed);
+		}
+
+		public void OnCrouch()
+		{
+			crouch = crouch > 0f ? 0f : 1f;
 		}
 
 		public void OnPause()
@@ -85,6 +91,7 @@ namespace StarterAssets
 
 		public void SprintInput(bool newSprintState)
 		{
+			crouch = 0f;
 			sprint = newSprintState;
 		}
 	}

@@ -21,6 +21,9 @@ namespace StarterAssets
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
 
+        [Tooltip("Crouch speed of the character in m/s")]
+        public float CrouchSpeed = 1.5f;
+
         [Tooltip("How fast the character turns to face movement direction")]
         [Range(0.0f, 0.3f)]
         public float RotationSmoothTime = 0.12f;
@@ -224,7 +227,7 @@ namespace StarterAssets
                 return;
 
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed = _input.crouch >= 1 ? CrouchSpeed : (_input.sprint ? SprintSpeed : MoveSpeed);
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
@@ -286,6 +289,12 @@ namespace StarterAssets
             {
                 _animator.SetFloat(_animIDSpeed, _animationBlend);
                 _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+
+                //_animator.SetFloat("Crouching", _input.crouch);
+                float _currentCrouchTransition = _animator.GetFloat("Crouching");
+                _currentCrouchTransition = Mathf.Lerp(_currentCrouchTransition, _input.crouch, Time.deltaTime * SpeedChangeRate);
+                if (_currentCrouchTransition < 0.01f) _currentCrouchTransition = 0f;
+                _animator.SetFloat("Crouching", _currentCrouchTransition);
             }
         }
 
