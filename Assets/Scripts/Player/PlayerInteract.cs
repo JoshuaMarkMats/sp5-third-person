@@ -41,6 +41,7 @@ public class PlayerInteract : MonoBehaviour
         if (_currentDialogueNPC != null && Vector3.SqrMagnitude(_currentDialogueNPC.transform.position - transform.position) > interactRange * interactRange)
         {
             _currentDialogueNPC.StopSpeaking();
+            isTalking = false;
             _currentDialogueNPC = null;
         }
 
