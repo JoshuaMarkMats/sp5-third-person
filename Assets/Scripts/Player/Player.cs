@@ -35,6 +35,12 @@ public class Player : MonoBehaviour, IDamageable
         _input.ToggleFlashlightEvent.AddListener(ToggleFlashlight);
     }
 
+    private void Update()
+    {
+        if (_flashlightOn && _input.crouch > 0)
+            ToggleFlashlight();
+    }
+
     public void TakeDamage(int damage)
     {
         GameController.Instance.GameOver();
@@ -42,7 +48,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void ToggleFlashlight()
     {
-        if (!_playerController.CanMove)
+        if (!_playerController.CanMove || _input.crouch > 0)
             return;
 
         _flashlightOn = !_flashlightOn;
