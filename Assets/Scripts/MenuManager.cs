@@ -20,6 +20,9 @@ public static class MenuManager
         _menuMain = menuHolder.transform.Find("MenuMain").gameObject;
         _menuSettings = menuHolder.transform.Find("MenuSettings").gameObject;
 
+        if (_menuSettings != null )
+            _menuSettings.SetActive(false);
+
         IsInitialized = true;
     }
 

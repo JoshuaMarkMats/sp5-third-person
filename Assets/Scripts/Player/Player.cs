@@ -45,6 +45,8 @@ public class Player : MonoBehaviour, IDamageable
     public void TakeDamage(int damage)
     {
         GameController.Instance.GameOver();
+        AudioController.Instance.SetBackgroundMusic(4);
+        AudioController.Instance.PlaySFX(4);
     }
 
     private void ToggleFlashlight()

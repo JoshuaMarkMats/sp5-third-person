@@ -38,7 +38,7 @@ public class PlayerInteract : MonoBehaviour
     private void Update()
     {
         //stop talking to current npc if it goes out of range
-        if (_currentDialogueNPC != null && Vector3.SqrMagnitude(_currentDialogueNPC.transform.position - transform.position) > interactRange * interactRange)
+        if (_currentDialogueNPC != null && Vector3.SqrMagnitude(_currentDialogueNPC.transform.position - transform.position) > interactRange * interactRange + 2)
         {
             _currentDialogueNPC.StopSpeaking();
             isTalking = false;
@@ -103,31 +103,6 @@ public class PlayerInteract : MonoBehaviour
 
     private void OnInteract()
     {
-        
-
-        /*foreach (Collider col in insideInteractRange)
-        {
-            if (col.CompareTag("Collectible"))
-            {
-                Destroy(col.gameObject);
-                pickedUpEvent.Invoke();
-                _playerAnimator.SetTrigger("PickUp");
-                break;
-            }
-            else if (col.TryGetComponent(out DialogueNPC dialogueNPC))
-            {
-                if (_currentDialogueNPC != null)
-                {
-                    if (dialogueNPC.Speak()) _currentDialogueNPC = null;
-                }
-                else
-                {
-                    _currentDialogueNPC = dialogueNPC;
-                    if (dialogueNPC.Speak()) _currentDialogueNPC = null;
-                }
-                break;
-            }
-        }*/
         if (_currentInteractable == null) return;
 
         switch (_currentInteractable.tag)
@@ -137,6 +112,7 @@ public class PlayerInteract : MonoBehaviour
                 pickedUpEvent.Invoke();
                 _playerAnimator.SetTrigger("PickUp");
                 _playerInputs.crouch = 0f;
+                UIController.Instance.ShowInteract("");
                 break;
             case "DialogueNPC":
                 if (_currentInteractable.TryGetComponent(out DialogueNPC dialogueNPC))

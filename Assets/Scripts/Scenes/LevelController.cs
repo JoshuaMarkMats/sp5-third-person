@@ -8,6 +8,8 @@ public class LevelController : MonoBehaviour
     public static LevelController Instance;
 
     [SerializeField]
+    private int _musicIndex = 1;
+    [SerializeField]
     private List<GameObject> _itemsToPickup;
 
     private void Awake()
@@ -20,7 +22,7 @@ public class LevelController : MonoBehaviour
 
     private void Start()
     {
-        AudioController.Instance.SetBackgroundMusic(0);
+        AudioController.Instance.SetBackgroundMusic(_musicIndex);
         Cursor.lockState = CursorLockMode.Locked;
     }
 
