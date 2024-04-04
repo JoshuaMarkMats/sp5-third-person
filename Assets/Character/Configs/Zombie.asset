@@ -19,7 +19,7 @@ MonoBehaviour:
   LineOfSightLayers:
     serializedVersion: 2
     m_Bits: 256
-  detectionRange: 5
+  detectionRange: 12
   fieldOfView: 90
   DefaultState: 2
   idleLocationRadius: 4

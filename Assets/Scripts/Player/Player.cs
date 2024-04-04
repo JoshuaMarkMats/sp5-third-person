@@ -48,7 +48,7 @@ public class Player : MonoBehaviour, IDamageable
 
     private void ToggleFlashlight()
     {
-        if (!_playerController.CanMove || _input.crouch > 0)
+        if (!_playerController.CanMove || (_flashlightOn == false && _input.crouch > 0))
             return;
 
         _flashlightOn = !_flashlightOn;
