@@ -36,8 +36,7 @@ public class EnemyLineOfSightChecker : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        Player player;
-        if (other.TryGetComponent(out player))
+        if (other.TryGetComponent(out Player player))
         {
             onLoseSight?.Invoke(player);
             if (checkForLineOfSightCoroutine != null)
@@ -47,9 +46,12 @@ public class EnemyLineOfSightChecker : MonoBehaviour
 
     private bool CheckLineOfSight(Player player)
     {
-        Vector3 direction = (player.transform.position - transform.position).normalized;
+        Vector3 vectorToPlayer = player.transform.position - transform.position;
+        Vector3 direction = vectorToPlayer.normalized;
         if (Vector3.Dot(transform.forward, direction) >= Mathf.Cos(fieldOfView))
         {
+            if (player.IsCrouching && Vector3.SqrMagnitude(vectorToPlayer) > (sphereCollider.radius * sphereCollider.radius) / 3)
+                return false;
             onGainSight?.Invoke(player);
         }
         return false;

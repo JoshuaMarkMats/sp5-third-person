@@ -19,6 +19,7 @@ public class Player : MonoBehaviour, IDamageable
     private bool _isAlive = true;
 
     public bool IsAlive { get { return _isAlive; } }
+    public bool IsCrouching { get { return !Mathf.Approximately(_input.crouch, 0); } }
 
     private const string TURN_ON_FLASHLIGHT_PARAMETER = "TurnOnFlashlight";
     private const string TURN_OFF_FLASHLIGHT_PARAMETER = "TurnOffFlashlight";

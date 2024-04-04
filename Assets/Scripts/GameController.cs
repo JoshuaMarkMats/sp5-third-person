@@ -48,7 +48,7 @@ public class GameController : MonoBehaviour
     {
         Time.timeScale = 1f;
         Stats.Instance.ChineseTakeout = 0;
-        SceneLoader.LoadScene("CrashedShip");
+        SceneLoader.LoadScene(1);
     }
 
     public void ReturnToMainMenu()
