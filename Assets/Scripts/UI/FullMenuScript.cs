@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FullMenuScript : MonoBehaviour
 {
@@ -17,7 +18,8 @@ public class FullMenuScript : MonoBehaviour
         {
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 1f;
-            MenuManager.Init();
+            if (SceneManager.GetSceneByName("EndScreen") != SceneManager.GetActiveScene()) //hacky fix for lack of menumanager at the end
+                MenuManager.Init();
         }
     }
 }
