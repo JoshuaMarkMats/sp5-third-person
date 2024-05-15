@@ -3412,6 +3412,7 @@ MonoBehaviour:
   - Anyway, when you see a box, just pick it up. (Press E)
   - You're also issued with a flashlight (Toggle with F)
   - If you need to be particularly sneaky, just crouch around. (Toggle with Ctrl)
+  - Though you could also just sprint through... (Hold Shift)
   - The cleaning team left a few boxes around, 3 from their records. You could start
     by picking them up then heading to the ship.
 --- !u!136 &273299542
@@ -13350,14 +13351,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'WASD - move
 
+    Shift - sprint
+
     E - interact
 
     F - flashlight
 
-    Ctrl - crouch
+    Ctrl
+    - crouch
 
-    Esc
-    - pause'
+    Esc - pause'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
